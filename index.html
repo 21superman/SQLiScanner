@@ -1,0 +1,181 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <title>Sqliscanner by 0xbug</title>
+
+    <link rel="stylesheet" href="stylesheets/styles.css">
+    <link rel="stylesheet" href="stylesheets/github-light.css">
+    <meta name="viewport" content="width=device-width">
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+    <div class="wrapper">
+      <header>
+        <h1>Sqliscanner</h1>
+        <p>Automatic SQL injection with Charles and sqlmapapi</p>
+
+        <p class="view"><a href="https://github.com/0xbug/SQLiScanner">View the Project on GitHub <small>0xbug/SQLiScanner</small></a></p>
+
+
+        <ul>
+          <li><a href="https://github.com/0xbug/SQLiScanner/zipball/master">Download <strong>ZIP File</strong></a></li>
+          <li><a href="https://github.com/0xbug/SQLiScanner/tarball/master">Download <strong>TAR Ball</strong></a></li>
+          <li><a href="https://github.com/0xbug/SQLiScanner">View On <strong>GitHub</strong></a></li>
+        </ul>
+      </header>
+      <section>
+        <h1>
+<a id="sqliscanner" class="anchor" href="#sqliscanner" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>SQLiScanner</h1>
+
+<p><a href="https://github.com/0xbug/SQLiScanner/issues"><img src="https://img.shields.io/github/issues/0xbug/SQLiScanner.svg" alt="GitHub issues"></a>
+<a href="https://github.com/0xbug/SQLiScanner/network"><img src="https://img.shields.io/github/forks/0xbug/SQLiScanner.svg" alt="GitHub forks"></a>
+<a href="https://github.com/0xbug/SQLiScanner/stargazers"><img src="https://img.shields.io/github/stars/0xbug/SQLiScanner.svg" alt="GitHub stars"></a>
+<a href="https://www.python.org/"><img src="https://img.shields.io/badge/python-3.x-yellow.svg" alt="Python 3.x"></a> 
+<a href="https://raw.githubusercontent.com/0xbug/SQLiScanner/master/LICENSE"><img src="https://img.shields.io/badge/license-GPLv3-blue.svg" alt="GitHub license"></a></p>
+
+<blockquote>
+<p>Automatic SQL injection with Charles and sqlmapapi</p>
+</blockquote>
+
+<p>中文版说明文档<a href="https://github.com/0xbug/SQLiScanner/blob/master/README_zh.md">点这里</a></p>
+
+<h2>
+<a id="introduction" class="anchor" href="#introduction" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Introduction</h2>
+
+<blockquote>
+<p>Automatic SQL injection with Charles and sqlmapapi</p>
+</blockquote>
+
+<h2>
+<a id="dependencies" class="anchor" href="#dependencies" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Dependencies</h2>
+
+<ul>
+<li>Django</li>
+<li>PostgreSQL</li>
+<li>Celery</li>
+<li>sqlmap</li>
+<li>redis</li>
+</ul>
+
+<h2>
+<a id="supported-platforms" class="anchor" href="#supported-platforms" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Supported platforms</h2>
+
+<ul>
+<li>Linux</li>
+<li>osx</li>
+</ul>
+
+<h2>
+<a id="screenshots" class="anchor" href="#screenshots" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Screenshots</h2>
+
+<p><img src="http://obfxuk8r6.bkt.clouddn.com/sqliscanner-upload.png" alt="">
+<img src="http://obfxuk8r6.bkt.clouddn.com/sqliscanner-stat.png" alt="">
+<img src="http://obfxuk8r6.bkt.clouddn.com/sqliscanner-allresults.png" alt="">
+<img src="http://obfxuk8r6.bkt.clouddn.com/sqliscanner-detail.png" alt="">
+<img src="http://obfxuk8r6.bkt.clouddn.com/sqliscanner-vulns.png" alt=""></p>
+
+<h2>
+<a id="installation" class="anchor" href="#installation" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Installation</h2>
+
+<p>Preferably, you can download SQLiScanner by cloning the Git repository:</p>
+
+<pre><code>git clone https://github.com/0xbug/SQLiScanner.git --depth 1
+</code></pre>
+
+<p>You can download sqlmap by cloning the Git repository:</p>
+
+<pre><code>git clone https://github.com/sqlmapproject/sqlmap.git --depth 1
+</code></pre>
+
+<p>SQLiScanner works with Python version 3.x on Linux and osx.</p>
+
+<p>Create virtualenv and install requirements</p>
+
+<pre><code>cd SQLiScanner/
+virtualenv --python=/usr/local/bin/python3.5 venv
+source venv/bin/activate
+pip install -r requirements.txt
+</code></pre>
+
+<h2>
+<a id="setting" class="anchor" href="#setting" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Setting</h2>
+
+<p>DATABASES Setting</p>
+
+<pre><code>SQLiScanner/settings.py:85
+</code></pre>
+
+<pre><code>DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': '',
+        'USER': '',
+        'PASSWORD': '',
+        'HOST': '127.0.0.1',
+        'PORT': '5432',
+    }
+}
+</code></pre>
+
+<p>SendEmail Setting</p>
+
+<pre><code>SQLiScanner/settings.py:152
+</code></pre>
+
+<pre><code># Email
+
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_USE_TLS = False
+EMAIL_HOST = ''
+EMAIL_PORT = 25
+EMAIL_HOST_USER = ''
+EMAIL_HOST_PASSWORD = ''
+DEFAULT_FROM_EMAIL = ''
+</code></pre>
+
+<pre><code>scanner/tasks.py:13
+</code></pre>
+
+<pre><code>class SqlScanTask(object):
+    def __init__(self, sqli_obj):
+        self.api_url = "http://127.0.0.1:8775"
+        self.mail_from = ""
+        self.mail_to = [""]
+
+</code></pre>
+
+<h2>
+<a id="syncdb" class="anchor" href="#syncdb" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Syncdb</h2>
+
+<pre><code>python manage.py makemigrations scanner
+python manage.py migrate
+</code></pre>
+
+<h2>
+<a id="create-superuser" class="anchor" href="#create-superuser" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Create superuser</h2>
+
+<pre><code>python manage.py createsuperuser
+</code></pre>
+
+<h2>
+<a id="run" class="anchor" href="#run" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Run</h2>
+
+<pre><code>redis-server
+python sqlmapapi.py -s -p 8775
+python manage.py celery worker --loglevel=info
+python manage.py runserver
+</code></pre>
+      </section>
+      <footer>
+        <p>This project is maintained by <a href="https://github.com/0xbug">0xbug</a></p>
+        <p><small>Hosted on GitHub Pages &mdash; Theme by <a href="https://github.com/orderedlist">orderedlist</a></small></p>
+      </footer>
+    </div>
+    <script src="javascripts/scale.fix.js"></script>
+    
+  </body>
+</html>
